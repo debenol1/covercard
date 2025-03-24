@@ -102,28 +102,62 @@ To stop or restart the program execute the following:
 ## Create CCID service
 In order to get the CCID daemon started automaticallv, create a service configuration file:
 
-   sudo vi /etc/systemd/system/ccid.service
+	sudo vi /etc/systemd/user/ccid.service
 	
 Enter the following lines:
 
-	[Unit]
-	Description=CCID
-
+	[[Unit]
+ 	Description = CCID controller to manage pscsd based card terminal 
+ 	
 	[Service]
-	User=USER_WITH_SUDOERS_RIGHTS
-	WorkingDirectory=/BASE_DIRECTORY
-	ExecStart=java -jar io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar 
-	Restart=always
-
+ 	Type = forking
+ 	Restart=always
+ 	RestartSec=1
+ 	SuccessExitStatus=143 
+ 	ExecStart = /DESTINATION_FOLDER//ccid/ccid.sh start
+ 	ExecStop = /DESTINATION_FOLDER/ccid/ccid.sh stop
+ 	ExecReload = /DESTINATION_FOLDER/ccid/ccid.sh reload
+ 	StandardOutput=file:%h/log_file
 	[Install]
-	WantedBy=multi-user.target
+ 	WantedBy=multi-user.target
 
-	
+Reload the systemd daemon:
+
+	systemctl --user daemon-reload
+
+
 Activate the service:
 
-	sudo systemctl daemon-reload
-	sudo systemctl start ccid.service
-	sudo systemctl enable ccid.service
-	
-If you want to disable the service enter:
-        sudo systemctl disable ccid.service
+	systemctl --user enable ccid.service
+
+Start the service:
+
+	systemctl --user start ccid.service
+
+Show the status:
+
+	systemctl --user status ccid.service
+
+You should see something like:
+
+	systemctl --user status ccid.service
+	● ccid.service - CCID controller to manage pscsd based card terminal
+     Loaded: loaded (/etc/xdg/systemd/user/ccid.service; enabled; preset: enabled)
+     Active: active (running) since Mon 2025-03-24 20:50:37 CET; 1s ago
+    Process: 54313 ExecStart=/opt//ccid/ccid.sh start (code=exited, status=0/SUCCESS)
+  	 Main PID: 54314 (java)
+      Tasks: 21 (limit: 38148)
+     Memory: 62.7M (peak: 64.3M)
+        CPU: 836ms
+     CGroup: /user.slice/user-1008.slice/user@1008.service/app.slice/ccid.service
+             └─54314 java -jar /opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar /tmp
+
+	Mär 24 20:50:37 chbs177 systemd[2068]: Starting ccid.service - CCID controller to manage pscsd based card terminal...
+	Mär 24 20:50:37 chbs177 systemd[2068]: Started ccid.service - CCID controller to manage pscsd based card terminal.
+
+To inspect the log:
+
+	journalctl --user -u ccid.service
+
+Finito. Have a nice day
+
