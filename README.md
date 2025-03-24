@@ -17,7 +17,7 @@ Check out the git repository:
 
 Build the product:
 
-   mvn clean compile assembly:single	
+	mvn clean compile assembly:single	
 
 ## Installation
 Copy the compiled binaries to the destination folder. First plug in the physical Card Terminal. Then start the CCID daemon by running the following command:
@@ -84,7 +84,7 @@ ex. sudo chmod +x /DESTINATION_PATH/ccid/ccid.sh
 
 To test the ccid.jar execute the following commands:
 
-	/usr/local/bin/./Service_Name.sh start
+	/DESTINATION_FOLDER/ccid/ccid.sh start
 
 Now take a look at the processes:
 
@@ -96,8 +96,8 @@ You should see something similar:
 
 To stop or restart the program execute the following:
 
-	/usr/local/bin/./Service_Name.sh stop
-	/usr/local/bin/./Service_Name.sh restart
+	/DESTINATION_FOLDER/ccid/ccid.sh stop
+	/DESTINATION_FOLDER/ccid/ccid.sh restart
 
 ## Create CCID service
 In order to get the CCID daemon started automaticallv, create a service configuration file:
