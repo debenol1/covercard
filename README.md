@@ -13,7 +13,7 @@ CCID is a PCSC based daemon which interacts with USB smart card reader. It extra
 ## Build
 Check out the git repository:
 
-   git clone https://github.com/debenol1/covercard.git
+	git clone https://github.com/debenol1/covercard.git
 
 Build the product:
 
@@ -28,7 +28,7 @@ The generated logs are stored in the relative subfolder **logs**
 
 	/DESTINATION_PATH/ccid/logs/application-YYYYMMDD.log
 
-The installation of the java binaries is done.
+The installation of the java binaries is done. **IMPORTANT: connect the card terminal before continuing**
 ## Create CCID startup script
 Create a file under /DESTINATION_FOLDER/ccid by running the following command:
 
