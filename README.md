@@ -22,9 +22,13 @@ Build the product:
 ## Installation
 Copy the compiled binaries to the destination folder. First plug in the physical Card Terminal. Then start the CCID daemon by running the following command:
 
-	java -jar ccid.jar
+	java -jar /DESTINATION_FOLDER/ccid/ccid.jar
 
-The generated logs are stored in the relative subfolder log.
+The generated logs are stored in the relative subfolder log
+
+	/DESTINATION_PATH/ccid/logs/application-YYYYMMDD.log
+
+The installation of the java binaries is done.
 ## Create CCID startup script
 Create a file under /DESTINATION_FOLDER/ccid by running the following command:
 
