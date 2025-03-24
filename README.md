@@ -22,9 +22,9 @@ Build the product:
 ## Installation
 Copy the compiled binaries to the destination folder. First plug in the physical Card Terminal. Then start the CCID daemon by running the following command:
 
-   java -jar io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+	java -jar ccid.jar
 
-Optionally the daemon can be started with the -v parameter. The generated logs are stored in the relative subfolder log.
+The generated logs are stored in the relative subfolder log.
 ## Create CCID startup script
 Create a file under /DESTINATION_FOLDER/ccid by running the following command:
 
