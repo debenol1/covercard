@@ -12,22 +12,22 @@ CCID is a PCSC based daemon which interacts with USB smart card reader. It extra
 ## Build
 Check out the git repository:
 
-	git clone https://github.com/debenol1/covercard.git
+   git clone https://github.com/debenol1/covercard.git
 
 Build the product:
 
-        mvn clean compile assembly:single	
+   mvn clean compile assembly:single	
 
 ## Installation
 Copy the compiled binaries to the destination folder. First plug in the physical Card Terminal. Then start the CCID daemon by running the following command:
 
-	java -jar io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+   java -jar io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 Optionally the daemon can be started with the -v parameter. The generated logs are stored in the relative subfolder log.
 ## Create CCID service
 In order to get the CCID daemon started automaticallv, create a service configuration file:
 
-	sudo vi /etc/systemd/system/ccid.service
+   sudo vi /etc/systemd/system/ccid.service
 	
 Enter the following lines:
 

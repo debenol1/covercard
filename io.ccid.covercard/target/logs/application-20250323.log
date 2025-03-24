@@ -1,0 +1,3 @@
+2025-03-23 22:40:17.997 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - TerminalFactory for type PC/SC from provider SunPCSC
+2025-03-23 22:40:18.009 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - [1] terminals found
+2025-03-23 22:40:18.010 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - ACS ACR39U ICC Reader 00 00
