@@ -34,9 +34,9 @@ Paste the following Code in your Service_Name.sh.
 Modify the SERVICE_NAME(Name of your Service), PATH_TO_JAR(Absolute Path to you jar File), and choose a PID_PATH_NAME(just replace Service_Name to your Service_Name keeping -pid at end ) for the file you are going to use to store your service ID.Only Changes needed are to the first 3 variables:
 
 	#!/bin/sh 
-	SERVICE_NAME=Your_Service_Name 
-	PATH_TO_JAR=/usr/Name_of_User/MyJavaApplication.jar 
-	PID_PATH_NAME=/tmp/Service_Name-pid 
+	SERVICE_NAME=CCID 
+	PATH_TO_JAR=/DESTINATION_FOLDER/ccid/ccid.jar 
+	PID_PATH_NAME=/tmp/ccid-pid 
 	case $1 in 
 	start)
    	  	echo "Starting $SERVICE_NAME ..."
@@ -75,7 +75,25 @@ Modify the SERVICE_NAME(Name of your Service), PATH_TO_JAR(Absolute Path to you 
      fi     ;;
  	esac
 
+Write and quit the above file and give execution permisions :
+ex. sudo chmod +x /DESTINATION_PATH/ccid/ccid.sh
 
+To test the ccid.jar execute the following commands:
+
+	/usr/local/bin/./Service_Name.sh start
+
+Now take a look at the processes:
+
+	ps -ef --forest
+
+You should see something similar:
+
+	USER       PID       1 48 18:27 ?        00:00:01 java -jar /DESTINATION_PATH/ccid/ccid.jar /tmp
+
+To stop or restart the program execute the following:
+
+	/usr/local/bin/./Service_Name.sh stop
+	/usr/local/bin/./Service_Name.sh restart
 
 ## Create CCID service
 In order to get the CCID daemon started automaticallv, create a service configuration file:
