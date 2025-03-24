@@ -28,7 +28,7 @@ The generated logs are stored in the relative subfolder **logs**
 
 	/DESTINATION_PATH/ccid/logs/application-YYYYMMDD.log
 
-The installation of the java binaries is done. **IMPORTANT: connect the card terminal before continuing**
+The installation of the java binaries is done. **IMPORTANT: connect the card terminal now**
 ## Create CCID startup script
 Create a file under /DESTINATION_FOLDER/ccid by running the following command:
 
