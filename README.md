@@ -24,7 +24,7 @@ Copy the compiled binaries to the destination folder. First plug in the physical
 
 	java -jar /DESTINATION_FOLDER/ccid/ccid.jar
 
-The generated logs are stored in the relative subfolder log
+The generated logs are stored in the relative subfolder **logs**
 
 	/DESTINATION_PATH/ccid/logs/application-YYYYMMDD.log
 
