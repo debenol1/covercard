@@ -129,6 +129,7 @@ Reload the systemd daemon:
 Activate the service:
 
 	systemctl --user enable ccid.service
+	sudo systemctl --global enable user_service.service
 
 Start the service:
 
