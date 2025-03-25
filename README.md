@@ -67,16 +67,8 @@ The CCID should boot and display the following lines:
 	20:54:57.312 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - [1] terminals found
 	20:54:57.312 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - ACS ACR39U ICC Reader 00 00
 
+Insert an insurance card into the terminal, you should see the card number in the active Window. Press Ctrl C to stop the CCID Controler. Now we need to create the startup script
 
-Copy the compiled binaries to the destination folder. First plug in the physical Card Terminal. Then start the CCID daemon by running the following command:
-
-	java -jar /DESTINATION_FOLDER/ccid/ccid.jar
-
-The generated logs are stored in the relative subfolder **logs**
-
-	/DESTINATION_PATH/ccid/logs/application-YYYYMMDD.log
-
-The installation of the java binaries is done. **IMPORTANT: connect the card terminal now**
 ## Create CCID startup script
 Create a file under /DESTINATION_FOLDER/ccid by running the following command:
 
