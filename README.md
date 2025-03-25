@@ -19,7 +19,7 @@ Check the resulting list. You should see something like:
 	Bus 003 Device 011: ID 072f:b100 Advanced Card Systems, Ltd ACR39U
 
 > [!NOTE]  
-> If you can't detect the card terminal fix it before continuing
+> If you can't detect the card terminal fix it before proceeding
 
 ## Build
 Change to the PROJECT_FOLDER where the source code will be compiled:
@@ -74,7 +74,7 @@ Insert an insurance card into the terminal, you should see the card number in th
 Now press Ctrl/C to stop the CCID Controler. Now the CCID Controller can be started manually. Now we need the create the startup script
 
 > [!NOTE]  
-> If you can't start the io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar fix it before continuing
+> If you can't start the io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar fix it before proceeding
 
 ## Create CCID startup script
 Create a file under /DESTINATION_FOLDER/ccid by running the following command:
@@ -87,7 +87,7 @@ Modify the SERVICE_NAME(Name of your Service), PATH_TO_JAR(Absolute Path to you 
 	#!/bin/sh 
 	SERVICE_NAME=CCID 
 	PATH_TO_JAR=/DESTINATION_FOLDER/ccid/ccid.jar 
-	PID_PATH_NAME=/tmp/ccid-pid 
+	PID_PATH_NAME=/$HOME/.ccid-pid 
 	case $1 in 
 	start)
    	  	echo "Starting $SERVICE_NAME ..."
@@ -126,8 +126,9 @@ Modify the SERVICE_NAME(Name of your Service), PATH_TO_JAR(Absolute Path to you 
      fi     ;;
  	esac
 
-Write and quit the above file and give execution permisions :
-ex. sudo chmod +x /DESTINATION_PATH/ccid/ccid.sh
+Write and quit the above file and give execution permisions:
+
+	sudo chmod +x /DESTINATION_PATH/ccid/ccid.sh
 
 To test the ccid.jar execute the following commands:
 
@@ -146,66 +147,15 @@ To stop or restart the program execute the following:
 	/DESTINATION_FOLDER/ccid/ccid.sh stop
 	/DESTINATION_FOLDER/ccid/ccid.sh restart
 
-## Create CCID service
-In order to get the CCID daemon started automaticallv, create a service configuration file:
+Altough we have now a startup/shutdown script the process is still evoked manually. To get the controller up and running automatically we need to reigster it
 
-	sudo vi /etc/systemd/user/ccid.service
-	
-Enter the following lines:
+> [!NOTE]  
+> If you can't start/stop the application by using the script fix it before proceeding
 
-	[[Unit]
- 	Description = CCID controller to manage pscsd based card terminal 
- 	
-	[Service]
- 	Type = forking
- 	Restart=always
- 	RestartSec=1
- 	SuccessExitStatus=143 
- 	ExecStart = /DESTINATION_FOLDER//ccid/ccid.sh start
- 	ExecStop = /DESTINATION_FOLDER/ccid/ccid.sh stop
- 	ExecReload = /DESTINATION_FOLDER/ccid/ccid.sh reload
- 	StandardOutput=file:%h/log_file
-	[Install]
- 	WantedBy=multi-user.target
+## Autostart/autostop
+The CCID controller writes the read health card number to the active Window. The underlying Java/AWT/Robot depends on the X Window System and cannot be controlled as a headless systemd services. On the contrary the startup/stop script of the CCID controller must be registered within your desktop environment (XFCE/Cinnamon/Mate etc.). Be sure to have the startup script triggered by the login action and - vice versa - the stop script by the logout action.
 
-Reload the systemd daemon:
+Thats it. Now you have installed a multi user CCID terminal controller 
 
-	systemctl --user daemon-reload
-
-
-Activate the service:
-
-	systemctl --user enable ccid.service
-	sudo systemctl --global enable user_service.service
-
-Start the service:
-
-	systemctl --user start ccid.service
-
-Show the status:
-
-	systemctl --user status ccid.service
-
-You should see something like:
-
-	systemctl --user status ccid.service
-	● ccid.service - CCID controller to manage pscsd based card terminal
-     Loaded: loaded (/etc/xdg/systemd/user/ccid.service; enabled; preset: enabled)
-     Active: active (running) since Mon 2025-03-24 20:50:37 CET; 1s ago
-    Process: 54313 ExecStart=/opt//ccid/ccid.sh start (code=exited, status=0/SUCCESS)
-  	 Main PID: 54314 (java)
-      Tasks: 21 (limit: 38148)
-     Memory: 62.7M (peak: 64.3M)
-        CPU: 836ms
-     CGroup: /user.slice/user-1008.slice/user@1008.service/app.slice/ccid.service
-             └─54314 java -jar /opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar /tmp
-
-	Mär 24 20:50:37 chbs177 systemd[2068]: Starting ccid.service - CCID controller to manage pscsd based card terminal...
-	Mär 24 20:50:37 chbs177 systemd[2068]: Started ccid.service - CCID controller to manage pscsd based card terminal.
-
-To inspect the log:
-
-	journalctl --user -u ccid.service
-
-Finito. Have a nice day
+Have a nice day!
 
