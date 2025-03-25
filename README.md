@@ -7,8 +7,19 @@ CCID is a PCSC based daemon which interacts with USB smart card reader. It extra
     - libpcsclite1
     - pcsc-tools
     - pcscd
+- Card Terminal that can be accessed by PCSD
 
-	sudo apt install libpcsclite1 pcsc-tools pcscd
+## Card Terminal
+Plug in the card terminal and run the following command:
+
+	lsusb
+
+Check the resulting list. You should see something like:
+
+	Bus 003 Device 011: ID 072f:b100 Advanced Card Systems, Ltd ACR39U
+
+> [!NOTE]  
+> If you can't detect the card terminal fix it before continuing
 
 ## Build
 Check out the git repository:
