@@ -1,15 +1,15 @@
 # CCID
 CCID is a PCSC based daemon which interacts with USB smart card reader. It extracts the card number from health insurance card according the [eCH-0064 specification](https://www.ech.ch/de/ech/ech-0064/1.0)
 ## Prerequisites
-- Local USER to run the service
 - JRE 17 or higher
-- Maven
+- Maven 3.9.5 or higher
 - Have the necessary libpcsc libraries installed:
-    - libpcsc-perl
-    - libpcsclite-dev
     - libpcsclite1
     - pcsc-tools
     - pcscd
+
+	sudo apt install libpcsclite1 pcsc-tools pcscd
+
 ## Build
 Check out the git repository:
 
