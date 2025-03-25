@@ -67,7 +67,14 @@ The CCID should boot and display the following lines:
 	20:54:57.312 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - [1] terminals found
 	20:54:57.312 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - ACS ACR39U ICC Reader 00 00
 
-Insert an insurance card into the terminal, you should see the card number in the active Window. Press Ctrl C to stop the CCID Controler. Now we need to create the startup script
+Insert an insurance card into the terminal, you should see the card number in the active Window. You can check the log file:
+
+	cat /DESTINATION_FOLDER/logs/application-yyyymmdd.log
+
+Now press Ctrl/C to stop the CCID Controler. Now the CCID Controller can be started manually. Now we need the create the startup script
+
+> [!NOTE]  
+> If you can't start the io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar fix it before continuing
 
 ## Create CCID startup script
 Create a file under /DESTINATION_FOLDER/ccid by running the following command:
