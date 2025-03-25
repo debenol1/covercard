@@ -1,4 +1,4 @@
-# CCID
+# CCID Controller
 CCID is a PCSC based daemon which interacts with USB smart card reader. It extracts the card number from health insurance card according the [eCH-0064 specification](https://www.ech.ch/de/ech/ech-0064/1.0)
 ## Prerequisites
 - JRE 17 or higher
@@ -22,6 +22,10 @@ Check the resulting list. You should see something like:
 > If you can't detect the card terminal fix it before continuing
 
 ## Build
+Change to the PROJECT_FOLDER where the source code will be compiled:
+
+	cd PROJECT_FOLDER
+
 Check out the git repository:
 
 	git clone https://github.com/debenol1/covercard.git
@@ -31,6 +35,39 @@ Build the product:
 	mvn clean compile assembly:single	
 
 ## Installation
+Create the DESTINATION_FOLDER:
+
+	sudo mkdir /DESTINATION_FOLDER
+
+Copy the assembled JAR to the DESTINATION_FOLDER
+
+	sudo cp PROJECT_FOLDER/io.ccid.covercard/target/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies /DESTINATION_FOLDER
+
+Create the log directory:
+
+	sudo mkdir /DESTINATION_FOLDER/logs
+
+Test the Java binaries:
+
+	java -jar DESTINATION_FOLDER/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+
+The CCID should boot and display the following lines:
+
+	2025-03-25T19:54:57.249656102Z main INFO Starting configuration XmlConfiguration[location=jar:file:/opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/log4j2.xml, lastModified=2025-03-23T21:36:25Z]...
+	2025-03-25T19:54:57.250616381Z main INFO Start watching for changes to jar:file:/opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/log4j2.xml every 0 seconds
+	2025-03-25T19:54:57.250779805Z main INFO Configuration XmlConfiguration[location=jar:file:/opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/log4j2.xml, lastModified=2025-03-23T21:36:25Z] started.
+	2025-03-25T19:54:57.252269515Z main INFO Stopping configuration org.apache.logging.log4j.core.config.DefaultConfiguration@1563da5...
+	2025-03-25T19:54:57.252645697Z main INFO Configuration org.apache.logging.log4j.core.config.DefaultConfiguration@1563da5 stopped.
+	2025-03-25T19:54:57.267943779Z main INFO Starting configuration XmlConfiguration[location=jar:file:/opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/log4j2.xml, lastModified=2025-03-23T21:36:25Z]...
+	2025-03-25T19:54:57.268069364Z main INFO Start watching for changes to jar:file:/opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/log4j2.xml every 0 seconds
+	2025-03-25T19:54:57.268173300Z main INFO Configuration XmlConfiguration[location=jar:file:/opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar!/log4j2.xml, lastModified=2025-03-23T21:36:25Z] started.
+	2025-03-25T19:54:57.268297259Z main INFO Stopping configuration org.apache.logging.log4j.core.config.DefaultConfiguration@6ae5aa72...
+	2025-03-25T19:54:57.268424376Z main INFO Configuration org.apache.logging.log4j.core.config.DefaultConfiguration@6ae5aa72 stopped.
+	20:54:57.307 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - TerminalFactory for type PC/SC from provider SunPCSC
+	20:54:57.312 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - [1] terminals found
+	20:54:57.312 [main] DEBUG ch.framsteg.io.ccid.covercard.Launcher - ACS ACR39U ICC Reader 00 00
+
+
 Copy the compiled binaries to the destination folder. First plug in the physical Card Terminal. Then start the CCID daemon by running the following command:
 
 	java -jar /DESTINATION_FOLDER/ccid/ccid.jar
