@@ -91,11 +91,11 @@ Write and quit the above file. Set the necessary execution permisions:
 
 	sudo chmod +x /DESTINATION_PATH/ccid/ccid.sh
 
-To test the `ccid.jar` execute the following commands:
+To test the `ccid.jar` execute the following command:
 
 	/DESTINATION_FOLDER/ccid/ccid.sh start
 
-Now take a look at the processes:
+Now take a look at the process:
 
 	ps -ef --forest
 
