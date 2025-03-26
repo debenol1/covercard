@@ -46,6 +46,7 @@ Copy the assembled JAR to the DESTINATION_FOLDER
 Create the log directory:
 
 	sudo mkdir /DESTINATION_FOLDER/logs
+        sudo chown -R a+w /DESTIONATON_FOLDER/logs
 
 Test the Java binaries:
 
@@ -82,49 +83,9 @@ Create a file under /DESTINATION_FOLDER/ccid by running the following command:
 	sudo vi /DESTINATION_FOLDER/ccid/ccid.sh
 
 Paste the following Code in your Service_Name.sh.
-Modify the SERVICE_NAME(Name of your Service), PATH_TO_JAR(Absolute Path to you jar File), and choose a PID_PATH_NAME(just replace Service_Name to your Service_Name keeping -pid at end ) for the file you are going to use to store your service ID.Only Changes needed are to the first 3 variables:
 
 	#!/bin/sh 
-	SERVICE_NAME=CCID 
-	PATH_TO_JAR=/DESTINATION_FOLDER/ccid/ccid.jar 
-	PID_PATH_NAME=/$HOME/.ccid-pid 
-	case $1 in 
-	start)
-   	  	echo "Starting $SERVICE_NAME ..."
-  		if [ ! -f $PID_PATH_NAME ]; then 
-      	nohup java -jar $PATH_TO_JAR /tmp 2>> /dev/null >>/dev/null &      
-                   echo $! > $PID_PATH_NAME  
-       	echo "$SERVICE_NAME started ..."         
-  	else 
-       	echo "$SERVICE_NAME is already running ..."
-  	fi
-	;;
-	stop)
-  		if [ -f $PID_PATH_NAME ]; then
-         PID=$(cat $PID_PATH_NAME);
-         echo "$SERVICE_NAME stoping ..." 
-         kill $PID;         
-         echo "$SERVICE_NAME stopped ..." 
-         rm $PID_PATH_NAME       
-  		else          
-         echo "$SERVICE_NAME is not running ..."   
-  	fi    
-	;;    
-	restart)  
-  	if [ -f $PID_PATH_NAME ]; then 
-      PID=$(cat $PID_PATH_NAME);    
-      echo "$SERVICE_NAME stopping ..."; 
-      kill $PID;           
-      echo "$SERVICE_NAME stopped ...";  
-      rm $PID_PATH_NAME     
-      echo "$SERVICE_NAME starting ..."  
-      nohup java -jar $PATH_TO_JAR /tmp 2>> /dev/null >> /dev/null &            
-      echo $! > $PID_PATH_NAME  
-      echo "$SERVICE_NAME started ..."    
-  	else           
-      echo "$SERVICE_NAME is not running ..."    
-     fi     ;;
- 	esac
+        java -jar /opt/ccid/io.ccid.covercard-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 Write and quit the above file and give execution permisions:
 
