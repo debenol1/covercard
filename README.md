@@ -103,12 +103,7 @@ You should see something similar:
 
 	USER       PID       1 48 18:27 ?        00:00:01 java -jar /DESTINATION_PATH/ccid/ccid.jar /tmp
 
-To stop or restart the program execute the following:
-
-	/DESTINATION_FOLDER/ccid/ccid.sh stop
-	/DESTINATION_FOLDER/ccid/ccid.sh restart
-
-Altough we have now a startup/shutdown script the process is still evoked manually. To get the controller up and running automatically we need to reigster it
+Altough we have now a startup script the process is still evoked manually. To get the CCID controller up and running automatically we need to reigster it
 
 > [!NOTE]  
 > If you can't start/stop the application by using the script fix it before proceeding
